@@ -52,8 +52,12 @@ class _TopPageState extends State<TopPage> {
                 child: TextField(
                   onSubmitted: (value) async{
                     // 郵便番号APIのURL
-
-                    address = await ZipCode.searchAddressFromZipCode(value);
+                    Map<String?, String?> response;
+                    response = await ZipCode.searchAddressFromZipCode(value);
+                    errorMessage = response['message'];
+                    if(response.containsKey('address')){
+                      address = response['address'];
+                    }
                     print(address);
                     setState(() {});
                   },
@@ -64,6 +68,7 @@ class _TopPageState extends State<TopPage> {
                 )
             ),
 
+            Text(errorMessage == null ? '': errorMessage as String),
             SizedBox(height: 50),
             Text(address.toString() , style: TextStyle(fontSize: 25),),
             Text(currentWeather.description.toString()),

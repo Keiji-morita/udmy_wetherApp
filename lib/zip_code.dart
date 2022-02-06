@@ -10,7 +10,7 @@ class ZipCode {
       Map <String, dynamic> data = jsonDecode(result.body);
       Map <String, String> response = {};
       if(data['message'] != null){
-        response['message'] = data['message'];
+        response['message'] = '郵便番号の桁数が不適切です。';
       } else {
         if(data['results'] == null){
           response['message'] = '正しい郵便番号を入力してください。';
