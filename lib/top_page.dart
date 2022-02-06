@@ -50,25 +50,20 @@ class _TopPageState extends State<TopPage> {
             Container(
               width: 200,
                 child: TextField(
-                  onSubmitted: (value) async {
+                  onSubmitted: (value) async{
                     print(value);
-
                     // 郵便番号APIのURL
-                    Map<String?, String?> response = {};
-                    response = await ZipCode.searchAddressFromZipCode(value);
-                    errorMessage = response['message'];
-                    if(response.containsKey(address)) {
-                      address = response['address'];
-                    }
+                    address = await ZipCode.searchAddressFromZipCode(value);
+                    print(address);
                     setState(() {});
-                      },
+                  },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: '郵便番号を入力'
                   ),
                 )
             ),
-            Text(errorMessage ==  null  ? '' :errorMessage as String, ),
+
             SizedBox(height: 50),
             Text(address.toString() , style: TextStyle(fontSize: 25),),
             Text(currentWeather.description.toString()),
