@@ -51,8 +51,8 @@ class _TopPageState extends State<TopPage> {
               width: 200,
                 child: TextField(
                   onSubmitted: (value) async{
-                    print(value);
                     // 郵便番号APIのURL
+                    
                     address = await ZipCode.searchAddressFromZipCode(value);
                     print(address);
                     setState(() {});
