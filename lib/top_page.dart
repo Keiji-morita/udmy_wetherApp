@@ -54,6 +54,7 @@ class _TopPageState extends State<TopPage> {
                     // 郵便番号APIのURL
                     Map<String?, String?> response;
                     response = await ZipCode.searchAddressFromZipCode(value);
+                      await Weather.getCurrentWeather(value);
                     errorMessage = response['message'];
                     if(response.containsKey('address')){
                       address = response['address'];
